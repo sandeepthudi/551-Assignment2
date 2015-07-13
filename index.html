@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html style="background-attachment: scroll;"><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+
+    <title>Application</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+
+<link href="assets/css/bootstrap.css" rel="stylesheet" media="screen" />
+    <link href="assets/css/bootstrap-theme.css" rel="stylesheet" media="screen" />
+    <link href="assets/css/styles.css" rel="stylesheet" media="screen" />
+    <script src="assets/js/external/angular.min.js"></script>
+    <script src="assets/js/external/jquery.min.js"></script>
+    <script src="assets/js/external/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="assets/js/products.js"></script>
+</head>
+
+<body>
+
+    <header class="compact">
+        <Strong>Application<Strong>
+        <span style="float:right"><a href="#/about">About</a></span>
+    </header>
+
+    <div class="main-content" ng-controller="myCtrl">
+
+        <div class="all-products page visible">
+
+            <div class="filters">
+                <form>
+
+                    <div class="filter-criteria">
+                        <span>Manufacturer</span>
+                        <div class="checkbox"><label><input type="checkbox" name="manufacturer" ng-click="filterProductsByCategory('Apple')" value="Apple">Apple</label></div>
+                        <div class="checkbox"><label><input type="checkbox" ng-click="filterProductsByCategory('Samsung')" name="manufacturer" value="samsung">Samsung</label></div>
+                        <div class="checkbox"><label><input type="checkbox" ng-click="filterProductsByCategory('HTC')"  name="manufacturer" value="Htc">HTC</label></div>
+                        <div class="checkbox"><label><input type="checkbox" name="manufacturer" ng-click="filterProductsByCategory('Nokia')" value="nokia">Nokia</label></div>
+                        <div class="checkbox"><label><input type="checkbox" name="manufacturer" ng-click="filterProductsByCategory('ZTE')" value="zte">ZTE</label></div>
+                        <div class="checkbox"><label><input type="checkbox" name="manufacturer" ng-click="filterProductsByCategory('Sony')" value="sony">Sony</label></div>
+                    </div>
+
+                    <div class="filter-criteria">
+                        <span>Storage</span>
+                        <label><input type="checkbox" ng-click="filterProductsByCategory('16')" value="16" name="storage">16 GB</label>
+                        <label><input type="checkbox" ng-click="filterProductsByCategory('32')" value="32" name="storage">32 GB</label>
+                    </div>
+
+                    <div class="filter-criteria">
+                        <span>OS</span>
+                        <label><input type="checkbox" value="android" name="os" ng-click="filterProductsByCategory('Android')">Android</label>
+                        <label><input type="checkbox" value="ios" name="os" ng-click="filterProductsByCategory('iOS')">iOS</label>
+                        <label><input type="checkbox" value="windows" name="os" ng-click="filterProductsByCategory('Windows')">Windows</label>
+                    </div>
+
+                    <div class="filter-criteria">
+                        <span>Camera</span>
+                        <label><input type="checkbox" value="5" name="camera" ng-click="filterProductsByCategory('5')">5 Mpx</label>
+                        <label><input type="checkbox" value="8" name="camera" ng-click="filterProductsByCategory('8')">8 Mpx</label>
+                        <label><input type="checkbox" value="12" name="camera" ng-click="filterProductsByCategory('12')">12 Mpx</label>
+                        <label><input type="checkbox" value="15" name="camera" ng-click="filterProductsByCategory('15')">15 Mpx</label>
+                    </div>
+
+                    <button ng-click="clearFilters()">Clear filters</button>
+
+                </form>
+
+            </div>
+
+            <ul class="products-list">
+            ​
+                        <li ng-repeat="product in products | filter:filteredProducts | orderBy:'name'">
+                            <a href="#" class="product-photo"><img src="{{product.image.small}}" height="130" alt="Sony Xperia Z3"></a>
+                            <h2><a href="#"> {{product.name}} </a></h2>
+                            <ul class="product-description">
+                                <li><span>Manufacturer: </span>{{product.manufacturer}}</li>
+                                <li><span>Storage: </span>{{product.storage}} GB</li><br>
+                                <li><span>OS: </span>{{product.os}}</li><br>
+                                <li><span>Camera: </span>{{product.camera}} Mpx</li>
+                            </ul>
+                            <p class="product-price">$ {{product.price}}</p>
+                            <div class="highlight" ng-click="openDetails(product)"></div>
+                        </li>
+                        
+                </ul>
+
+        </div>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <img src="{{modelProduct.image.large}}" alt="Sony Xperia Z3">
+                            <h1><a href="#"> {{modelProduct.name}} </a></h1>
+                            
+                                <span>Manufacturer: </span>{{modelProduct.manufacturer}}
+                                <span>Storage: </span>{{modelProduct.storage}} GB<br>
+                                <span>OS: </span>{{modelProduct.os}}<br>
+                                <span>Camera: </span>{{modelProduct.camera}} Mpx<br>
+                        
+                            <p class="product-price">$ {{modelProduct.price}}</p>
+            </div>
+            
+        </script>
+    </div>
+    
+
+</body></html>
